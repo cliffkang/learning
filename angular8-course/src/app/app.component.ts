@@ -8,4 +8,5 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'angular8-course';
   name = 'Cliff';
+  error = true;
 }
