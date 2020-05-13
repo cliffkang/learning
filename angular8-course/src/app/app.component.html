@@ -4,8 +4,11 @@
             <h3>I'm in the AppComponent!</h3>
             <hr>
             <app-servers></app-servers>
-            <app-warning-alert *ngIf="error"></app-warning-alert>
-            <app-success-alert *ngIf="!error"></app-success-alert>
+            <ng-container *ngIf="false">
+                <app-warning-alert *ngIf="error"></app-warning-alert>
+                <app-success-alert *ngIf="!error"></app-success-alert>
+                <app-username-input></app-username-input>
+            </ng-container>
         </div>
     </div>
 </div>
