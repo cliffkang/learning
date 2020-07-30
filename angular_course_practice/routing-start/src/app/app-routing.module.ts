@@ -7,8 +7,10 @@ import { UserComponent } from './users/user/user.component';
 import { EditServerComponent } from './servers/edit-server/edit-server.component';
 import { ServerComponent } from './servers/server/server.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
 import { AuthGuard } from "./auth-guard.service";
 import { CanDeactivateGuard } from "./servers/edit-server/can-deactivate-guard.service";
+import { ServerResolver } from "./servers/server/server-resolver.service";
 
 const appRoutes: Routes = [
     {
@@ -33,7 +35,8 @@ const appRoutes: Routes = [
         children: [
             {
                 path: ':id',
-                component: ServerComponent
+                component: ServerComponent,
+                resolve: { server: ServerResolver }
             },
             {
                 path: ':id/edit',
@@ -42,12 +45,14 @@ const appRoutes: Routes = [
             }
         ]
     },
-    { path: 'not-found', component: PageNotFoundComponent },
+    // { path: 'not-found', component: PageNotFoundComponent },
+    { path: 'not-found', component: ErrorPageComponent, data: { message: 'Page not found!' } },
     { path: '**', redirectTo: '/not-found' },
 ];
 
 @NgModule({
     imports: [
+        // RouterModule.forRoot(appRoutes, { useHash: true }) // if server can't send 404's to index.html for angular to handle
         RouterModule.forRoot(appRoutes)
     ],
     exports: [RouterModule]
